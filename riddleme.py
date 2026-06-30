@@ -64,8 +64,8 @@ f03 = v.iff((J | P | R))
 f04 = C.iff(s)
 
 # bank robbery is a small crime
-# (iff bank robbery then small crime)
-f05 = k.iff((s))
+# (if bank robbery then small crime)
+f05 = k >> s
 
 # villains commit large crimes and leave tell-tale clues
 # (iff villain committed then large crime and tell-tale clue left)
@@ -88,7 +88,7 @@ f10 = o
 
 # a hole in the grand could be left from an umbrella or an acid burn
 # (iff acid burn left or umbrella mark left then hole in the ground left)
-f11 = o.iff(( u | a ))
+f11 = o.iff((u | a))
 
 # no other clues were found at the scene
 f12 = ~c & ~b & ~r & ~p & ~w
