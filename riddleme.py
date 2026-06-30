@@ -51,58 +51,61 @@ J, P, R, C, a, c, b, u, t, r, p, w, s, k, v, l, i, o = vars(
 # a crime has been committed
 f01 = i
 
-# the crime has been committed either by supervillans or common criminals
-# (if crime then villan committed or criminal committed)
-f02 = i >> (v | C)
+# the crime is either a small crime or a large crime
+# (iff crime then small crime or large crime)
+f02 = i.iff((s | l))
 
 # the joker, penguin and riddler are supervillans
-# (if villan committed then joker committed or penguin committed or riddler committed)
-f03 = v >> (J | P | R)
+# (iff villan committed then joker committed or penguin committed or riddler committed)
+f03 = v.iff((J | P | R))
 
 # low level criminals commit small crimes
-# (if small crime then criminal committed)
-f04 = s >> C
+# (iff small crime then criminal committed)
+f04 = C.iff(s)
 
 # bank robbery is a small crime
-# (if bank robbery then small crime)
-f05 = k >> s
+# (iff bank robbery then small crime)
+f05 = k.iff((s))
 
 # villains commit large crimes and leave tell-tale clues
-# (if villain committed then large crime and tell-tale clue left)
-f06 = v >> (l & t)
+# (iff villain committed then large crime and tell-tale clue left)
+f06 = v.iff((l)) & v.iff((t))
 
 # the joker leaves acid burs or playing cards or joy buzzers
-# (if joker committed then acid burns left or playing cards left or joy buzzers left)
-f07 = J >> (a | c | b)
+# (iff joker committed then acid burns left or playing cards left or joy buzzers left)
+f07 = J.iff((a | c | b))
 
 # the penguin leaves marks in the ground with his umbrella
-# (if penguin commited then umbrella marks left)
-f08 = P >> u
+# (iff penguin commited then umbrella marks left)
+f08 = P.iff(u)
 
 # the riddler only leaves riddles, puzzles or word games
-# (if riddler committed then riddles left or puzzles left or word games left)
-f09 = R >> (r | p | w)
+# (iff riddler committed then riddles left or puzzles left or word games left)
+f09 = R.iff((r | p | w))
 
 # a hole in the ground was left
 f10 = o
 
 # a hole in the grand could be left from an umbrella or an acid burn
-# (if acid burn left or umbrella mark left then hole in the ground left)
-f11 = ( u | a ) >> o
+# (iff acid burn left or umbrella mark left then hole in the ground left)
+f11 = o.iff(( u | a ))
+
+# no other clues were found at the scene
+f12 = ~c & ~b & ~r & ~p & ~w
 
 
 # ArgumentForms
 joker = ArgumentForm(
-    f01, f02, f03, f04, f05, f06, f07, f08, f09, f10, f11, conclusion=J
+    f01, f02, f03, f04, f05, f06, f07, f08, f09, f10, f11, f12, conclusion=J
 )
 penguin = ArgumentForm(
-    f01, f02, f03, f04, f05, f06, f07, f08, f09, f10, f11, conclusion=P
+    f01, f02, f03, f04, f05, f06, f07, f08, f09, f10, f11, f12, conclusion=P
 )
 riddler = ArgumentForm(
-    f01, f02, f03, f04, f05, f06, f07, f08, f09, f10, f11, conclusion=R
+    f01, f02, f03, f04, f05, f06, f07, f08, f09, f10, f11, f12, conclusion=R
 )
 common = ArgumentForm(
-    f01, f02, f03, f04, f05, f06, f07, f08, f09, f10, f11, conclusion=C
+    f01, f02, f03, f04, f05, f06, f07, f08, f09, f10, f11, f12, conclusion=C
 )
 
 # joker.print_truth_table()
