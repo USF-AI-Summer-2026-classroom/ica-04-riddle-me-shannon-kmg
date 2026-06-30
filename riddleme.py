@@ -88,7 +88,7 @@ f10 = o
 
 # a hole in the grand could be left from an umbrella or an acid burn
 # (if acid burn left or umbrella mark left then hole in the ground left)
-f11 = (u | a) >> o
+f11 = ( u | a ) >> o
 
 
 # ArgumentForms
@@ -106,8 +106,8 @@ common = ArgumentForm(
 )
 
 # joker.print_truth_table()
-
-print("The Joker committed this crime:", joker.is_valid())
-print("The Penguin committed this crime:", penguin.is_valid())
-print("The Riddler committed this crime:", riddler.is_valid())
-print("A common criminal committed this crime:", common.is_valid())
+print("Who definitely committed this crime:")
+print("A low-level criminal: ", common.is_valid())
+print("The Joker: ", joker.is_valid())
+print("The Penguin: ", penguin.is_valid())
+print("The Riddler: ", riddler.is_valid())
